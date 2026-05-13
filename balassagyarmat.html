@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Balassagyarmat – A Palócok Fővárosa</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      color: #2c2c2c;
+      background: #f5f0eb;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a3a2a 0%, #2d6a4f 50%, #40916c 100%);
+      color: white;
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('varos.jpg') center center / cover no-repeat;
+      opacity: 0.45;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .hero .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.85;
+      font-style: italic;
+      position: relative;
+    }
+
+    .hero .coat-of-arms {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    /* NAV */
+    nav {
+      background: #1a3a2a;
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: #d4edda;
+      text-decoration: none;
+      padding: 14px 24px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: background 0.2s;
+    }
+
+    nav a:hover {
+      background: #2d6a4f;
+      color: white;
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 960px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      color: #1a3a2a;
+      border-left: 5px solid #40916c;
+      padding-left: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* STAT CARDS */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px 16px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .stat-card .value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #2d6a4f;
+    }
+
+    .stat-card .label {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    /* INFO CARD */
+    .info-card {
+      background: white;
+      border-radius: 12px;
+      padding: 28px 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .info-card p + p {
+      margin-top: 14px;
+    }
+
+    /* ATTRACTIONS */
+    .attraction-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .attraction {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .attraction:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    }
+
+    .attraction .icon-wrap {
+      background: linear-gradient(135deg, #2d6a4f, #74c69d);
+      padding: 28px;
+      text-align: center;
+      font-size: 3rem;
+    }
+
+    .attraction .content {
+      padding: 20px;
+    }
+
+    .attraction h3 {
+      font-size: 1.1rem;
+      color: #1a3a2a;
+      margin-bottom: 8px;
+    }
+
+    .attraction p {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    /* TIMELINE */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #2d6a4f, #74c69d);
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -28px;
+      top: 6px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #40916c;
+      border: 3px solid #f5f0eb;
+      box-shadow: 0 0 0 2px #40916c;
+    }
+
+    .timeline-item .year {
+      font-weight: bold;
+      color: #2d6a4f;
+      font-size: 1rem;
+    }
+
+    .timeline-item p {
+      color: #444;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-top: 2px;
+    }
+
+    /* MAP PLACEHOLDER */
+    .map-box {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+
+    .map-box svg {
+      width: 280px;
+      max-width: 100%;
+      opacity: 0.8;
+    }
+
+    .map-box p {
+      margin-top: 16px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* QUOTE */
+    blockquote {
+      background: linear-gradient(135deg, #d8f3dc, #b7e4c7);
+      border-left: 5px solid #2d6a4f;
+      border-radius: 0 12px 12px 0;
+      padding: 24px 28px;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #1a3a2a;
+      margin: 40px 0;
+    }
+
+    blockquote cite {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      font-style: normal;
+      color: #2d6a4f;
+      font-weight: bold;
+    }
+
+    /* LEGBÁTRABB VÁROS */
+    .brave-section {
+      background: linear-gradient(135deg, #7b1a1a 0%, #a82828 60%, #c0392b 100%);
+      color: white;
+      padding: 60px 20px;
+    }
+
+    .brave-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+
+    .brave-inner img {
+      width: 160px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.4));
+    }
+
+    .brave-text h2 {
+      font-size: 2rem;
+      border-left: 5px solid #f5c518;
+      padding-left: 16px;
+      color: #f5c518;
+      margin-bottom: 20px;
+    }
+
+    .brave-text p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      opacity: 0.92;
+    }
+
+    .brave-text p + p {
+      margin-top: 14px;
+    }
+
+    .brave-badge {
+      display: inline-block;
+      margin-top: 20px;
+      background: #f5c518;
+      color: #7b1a1a;
+      font-weight: bold;
+      font-size: 0.95rem;
+      padding: 10px 22px;
+      border-radius: 30px;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 700px) {
+      .brave-inner { flex-direction: column; align-items: center; text-align: center; }
+      .brave-text h2 { border-left: none; border-bottom: 4px solid #f5c518; padding-left: 0; padding-bottom: 10px; }
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a3a2a;
+      color: #a8d5b5;
+      text-align: center;
+      padding: 32px 20px;
+      font-size: 0.85rem;
+    }
+
+    footer strong {
+      color: #d8f3dc;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      nav a { padding: 10px 14px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="coat-of-arms">🏰</div>
+    <h1>Balassagyarmat</h1>
+    <p class="subtitle">A Palócok Fővárosa &nbsp;•&nbsp; Nógrád vármegye</p>
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#adatok">Adatok</a>
+    <a href="#bemutato">Bemutató</a>
+    <a href="#latnivalok">Látnivalók</a>
+    <a href="#tortenet">Történet</a>
+    <a href="#elhelyezkedes">Elhelyezkedés</a>
+    <a href="#legbátrabb">Legbátrabb város</a>
+  </nav>
+
+  <!-- GYORS ADATOK -->
+  <section id="adatok">
+    <h2>Gyors adatok</h2>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="value">~14 500</div>
+        <div class="label">Lakos (2023)</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">58 km²</div>
+        <div class="label">Terület</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">154 m</div>
+        <div class="label">Tengerszint feletti magasság</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">1</div>
+        <div class="label">Kistérségi székhely</div>
+      </div>
+      <div class="stat-card">
+        <div class="value">1790</div>
+        <div class="label">Városi rang óta</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEMUTATÓ -->
+  <section id="bemutato">
+    <h2>A városról</h2>
+    <div class="info-card">
+      <p>
+        <strong>Balassagyarmat</strong> Észak-Magyarország egyik legrégebbi és legjelentősebb városa,
+        Nógrád vármegye székhelye. A Ipoly folyó mentén fekvő, festői környezetű kisváros
+        a Cserhát és a Börzsöny találkozásánál helyezkedik el, mindössze néhány kilométerre
+        a szlovák határtól.
+      </p>
+      <p>
+        A város büszkén viseli a <em>„Palócok Fővárosa"</em> nevet, utalva az itteni
+        palóc népcsoport gazdag hagyományaira, jellegzetes viseletére, dalkincsére és
+        kézműves kultúrájára. A Palóc Múzeum az egyik legnagyobb és legjelentősebb
+        néprajzi gyűjtemény az országban.
+      </p>
+      <p>
+        Balassagyarmat a határ menti együttműködés szép példája: a szomszédos
+        szlovák Ipeľské Predmostie és Veľký Krtíš városával élénk kapcsolatot ápol,
+        a közös rendezvények és a gyalogos határátkelő révén is.
+      </p>
+    </div>
+
+    <blockquote>
+      „Balogh Ádám, Bottyán János, Bercsényi Miklós – e vidék nemcsak természeti
+      szépségeivel, hanem hőseivel is gazdagította Magyarországot."
+      <cite>— Nógrád vármegyei mondás</cite>
+    </blockquote>
+  </section>
+
+  <!-- LÁTNIVALÓK -->
+  <section id="latnivalok">
+    <h2>Látnivalók és nevezetességek</h2>
+    <div class="attraction-grid">
+
+      <div class="attraction">
+        <div class="icon-wrap">🏛️</div>
+        <div class="content">
+          <h3>Palóc Múzeum</h3>
+          <p>Magyarország egyik legjelentősebb néprajzi gyűjteménye, a palóc kultúra,
+          viselet és néphagyományok teljes tárháza. 1891 óta gyűjti a térség
+          tárgyi emlékeit.</p>
+        </div>
+      </div>
+
+      <div class="attraction">
+        <div class="icon-wrap">⛪</div>
+        <div class="content">
+          <h3>Szent János-templom</h3>
+          <p>A város szívében álló barokk stílusú katolikus templom,
+          amelynek tornya meghatározza a városképet. Belsejét értékes
+          freskók és szobrok díszítik.</p>
+        </div>
+      </div>
+
+      <div class="attraction">
+        <div class="icon-wrap">🌿</div>
+        <div class="content">
+          <h3>Ipoly-mente természet</h3>
+          <p>Az Ipoly folyó menti területek kiváló lehetőséget nyújtanak
+          kerékpározáshoz, horgászathoz és természetjáráshoz. Az Ipoly
+          völgye védett természeti terület.</p>
+        </div>
+      </div>
+
+      <div class="attraction">
+        <div class="icon-wrap">🏟️</div>
+        <div class="content">
+          <h3>Városháza és főtér</h3>
+          <p>A 19. századi klasszicista városháza és a felújított főtér
+          a város közigazgatási és kulturális szíve. Nyáron számos
+          rendezvénynek ad otthont.</p>
+        </div>
+      </div>
+
+      <div class="attraction">
+        <div class="icon-wrap">🎭</div>
+        <div class="content">
+          <h3>Madách Imre Művelődési Ház</h3>
+          <p>A neves drámaíró, <em>Az ember tragédiájá</em>nak szerzője
+          e vidékről származik. A művelődési ház az ő nevét viseli,
+          rendszeres kulturális programokkal.</p>
+        </div>
+      </div>
+
+      <div class="attraction">
+        <div class="icon-wrap">🌉</div>
+        <div class="content">
+          <h3>Határ menti séta</h3>
+          <p>A gyalogos határátkelőn átjutva megismerhető az Ipoly másik
+          partján fekvő szlovák Ipeľské Predmostie is – különleges
+          kétnemzeti élmény.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TÖRTÉNET -->
+  <section id="tortenet">
+    <h2>Rövid történelem</h2>
+    <div class="info-card">
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="year">1000 körül</div>
+          <p>A mai Balassagyarmat területén már az Árpád-korban megtelepültek éltek.
+          A „Gyarmat" helynév avar-kori törzsnévre vezethető vissza.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">13–14. század</div>
+          <p>A Balassa (Balassi) nemes família birtoka. Róluk kapta a város az
+          előnevét – innen az összetett elnevezés: Balassa + Gyarmat.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">1552–1593</div>
+          <p>Török hódoltság időszaka. A várost többször feldúlják, de a palóc
+          népi kultúra megőrzi folytonosságát.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">1790</div>
+          <p>II. József rendeletével Balassagyarmat mezővárosi, majd hamarosan
+          szabad királyi városi rangot kap.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">1849</div>
+          <p>A szabadságharc idején a város több csata színhelye.
+          Görgei Artúr seregei is átvonulnak erre.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">1920 – Trianon</div>
+          <p>Az Ipoly határfolyóvá válik. Balassagyarmat határ menti várossá lesz,
+          a történelmi Nógrád vármegye kettészakad.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">1924 – „Csitári csata"</div>
+          <p>Balassagyarmat lakói fegyveresen visszafoglalják a csehszlovák csapatok
+          által megszállt városrészt – ez az esemény a „legkisebb győztes háború"
+          névvel vonult be a történelembe.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="year">2004 – EU-csatlakozás</div>
+          <p>Magyarország és Szlovákia EU-tagságával az Ipoly-határ fokozatosan
+          átjárhatóvá válik, megélénkül a határ menti együttműködés.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ELHELYEZKEDÉS -->
+  <section id="elhelyezkedes">
+    <h2>Elhelyezkedés</h2>
+    <div class="map-box">
+      <!-- Egyszerűsített Magyarország-szilhuett SVG -->
+      <svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+        <!-- Magyarország körvonala (egyszerűsített) -->
+        <path d="M 60,80 L 80,60 L 120,55 L 160,50 L 200,48 L 240,52 L 280,58 L 320,65 L 350,80
+                 L 360,100 L 355,120 L 340,140 L 310,155 L 270,160 L 230,162 L 190,158 L 150,155
+                 L 110,150 L 75,140 L 55,120 L 52,100 Z"
+              fill="#d8f3dc" stroke="#2d6a4f" stroke-width="2"/>
+        <!-- Budapest jelzés -->
+        <circle cx="220" cy="110" r="5" fill="#2d6a4f"/>
+        <text x="228" y="114" font-size="11" fill="#1a3a2a" font-family="Georgia">Budapest</text>
+        <!-- Balassagyarmat jelzés -->
+        <circle cx="178" cy="72" r="7" fill="#d62828" stroke="white" stroke-width="2"/>
+        <text x="188" y="68" font-size="12" font-weight="bold" fill="#d62828" font-family="Georgia">Balassagyarmat</text>
+        <!-- Ipoly folyó jelzés -->
+        <path d="M 130,58 Q 160,62 178,72" stroke="#4895ef" stroke-width="2" fill="none" stroke-dasharray="4,3"/>
+        <text x="128" y="54" font-size="9" fill="#4895ef" font-family="Georgia">Ipoly</text>
+        <!-- Észak nyíl -->
+        <text x="18" y="40" font-size="22" fill="#2d6a4f">↑</text>
+        <text x="19" y="55" font-size="11" fill="#2d6a4f" font-family="Georgia">É</text>
+      </svg>
+      <p>Balassagyarmat Észak-Magyarországon, az Ipoly folyó mentén, a szlovák határ közelében helyezkedik el.<br>
+      Budapesttől kb. <strong>90 km</strong>-re észak-északkeletre található.</p>
+    </div>
+  </section>
+
+  <!-- LEGBÁTRABB VÁROS -->
+  <div class="brave-section" id="legbátrabb">
+    <div class="brave-inner">
+      <img src="cimer.png" alt="Balassagyarmat címere" />
+      <div class="brave-text">
+        <h2>„Magyarország Legbátrabb Városa"</h2>
+        <p>
+          1919–1920-ban, a trianoni békediktátum következtében Balassagyarmat egy részét
+          csehszlovák csapatok szállták meg. A helyi lakosság azonban nem tűrte tétlenül
+          a megszállást: <strong>1919. január 10-én</strong> a városiak és a visszatérő
+          magyar katonák fegyvert fogtak, és saját erejükből verték ki a cseh légiókat
+          a városból.
+        </p>
+        <p>
+          Ez volt az egyetlen eset az első világháború utáni Közép-Európában, ahol egy
+          város polgárai önszerveződés útján, fegyveres úton szabadították fel magukat
+          az idegen megszállás alól – és sikerrel jártak. Az eseményt a köznyelv
+          a <em>„világ legkisebb győztes háborúja"</em> névvel illette.
+        </p>
+        <p>
+          A hősiességet az ország hivatalosan is elismerte: Balassagyarmat elnyerte
+          a <strong>„Magyarország Legbátrabb Városa"</strong> díszítő címet,
+          amelyet a mai napig büszkén visel. A városháza falán emléktábla örökíti
+          meg a szabadság visszaszerzésének napját.
+        </p>
+        <span class="brave-badge">⚔️ 1919. január 10. – A szabadság napja</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>Balassagyarmat</strong> &nbsp;•&nbsp; A Palócok Fővárosa</p>
+    <p style="margin-top:8px;">Nógrád vármegye &nbsp;|&nbsp; Magyarország</p>
+    <p style="margin-top:12px; opacity:0.6;">Bemutató oldal – oktatási célokra készült</p>
+  </footer>
+
+</body>
+</html>
